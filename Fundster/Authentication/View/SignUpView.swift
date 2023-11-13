@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @EnvironmentObject var authVM : AuthViewModel
     @State private var email: String = ""
     @State private var name: String = ""
     @State private var password: String = ""
@@ -24,12 +25,13 @@ struct SignUpView: View {
                     .foregroundColor(Color.gray)
             }
             
-            CustomTextField(imageName: "person.circle", placeholder: "Name", text: $name)
-            CustomTextField(imageName: "envelope", placeholder: "Email", text: $email)
-            CustomTextField(imageName: "iphone", placeholder: "Phone", text: $phone)
-            CustomTextField(imageName: "lock", placeholder: "Password", text: $password)
+            CustomTextField(isPassword: false, imageName: "person.circle", placeholder: "Name", text: $name)
+            CustomTextField(isPassword: false, imageName: "envelope", placeholder: "Email", text: $email)
+            CustomTextField(isPassword: false, imageName: "iphone", placeholder: "Phone", text: $phone)
+            CustomTextField(isPassword: true, imageName: "lock", placeholder: "Password", text: $password)
             Button {
-                
+                authVM.createUser(user: CreateUserDTO(name: name, email: email, role: Role.USER, profilePictureUrl: "", phoneNumber: phone, password: password))
+                authVM.login(email: email, password: password)
             } label: {
                 Text("SIGN UP")
                     .font(.headline)

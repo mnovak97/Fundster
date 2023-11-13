@@ -6,12 +6,32 @@
 //
 
 import SwiftUI
+import FirebaseCore
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+  func application(_ application: UIApplication,
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    FirebaseApp.configure()
+    return true
+  }
+}
+
 
 @main
 struct FundsterApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if authViewModel.currentUser == nil {
+                LoginView()
+                    .environmentObject(authViewModel)
+            } else {
+                ContentView()
+                    .environmentObject(authViewModel)
+            }
         }
     }
 }
+

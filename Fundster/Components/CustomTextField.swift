@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CustomTextField: View {
+    let isPassword: Bool
     let imageName: String
     let placeholder: String
     @Binding var text: String
@@ -17,9 +18,17 @@ struct CustomTextField: View {
             Image(systemName: imageName)
                 .renderingMode(.template)
                 .foregroundColor(isFocused ? Color("Primary") : Color.gray)
-            TextField(placeholder, text: $text)
-                .foregroundColor(isFocused ? Color("Primary") : Color.black)
-                .focused($isFocused)
+            if isPassword {
+                SecureField(placeholder, text: $text)
+                    .foregroundColor(isFocused ? Color("Primary") : Color.black)
+                    .focused($isFocused)
+                    .textInputAutocapitalization(.never)
+            } else {
+                TextField(placeholder, text: $text)
+                    .foregroundColor(isFocused ? Color("Primary") : Color.black)
+                    .focused($isFocused)
+                    .textInputAutocapitalization(.never)
+            }
         }
         .padding()
         .background(Color.white)

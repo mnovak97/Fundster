@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  Fundster
+
+  Created by Martin Novak on 12.11.2023..
+  
+*/
+"Users" = "Utenti";
+"Projects" = "Progetti";
+"Delete" = "Elimina";
+"Enter Number" = "Inserisci Numero";
+"FUND PROJECT" = "FINANZIA IL PROGETTO";
+"Profile Name" = "Nome Profilo";
+"Title" = "Titolo";
+"BACK THIS PROJECT" = "SOSTIENI QUESTO PROGETTO";
+"Project name:" = "Nome del Progetto:";
+"Enter project name" = "Inserisci nome del progetto";
+"Project description:" = "Descrizione del Progetto:";
+"Enter project description" = "Inserisci descrizione del progetto";
+"Project money goal:" = "Obiettivo finanziario del progetto:";
+"Enter money" = "Inserisci importo";
+"Project deadline:" = "Scadenza del Progetto:";
+"CREATE NEW PROJECT" = "CREA NUOVO PROGETTO";
+"Add project" = "Aggiungi progetto";
+"Search" = "Ricerca";
+"days" = "%@ giorni";
+"Funded" = "Finanziato";
+"Backers" = "Sostenitori";
+"Days left" = "Giorni rimasti";
+"Welcome back!" = "Bentornato!";
+"Log in to your existing Fundster account" = "Accedi al tuo account esistente su Fundster";
+"Enter email" = "Inserisci l'email";
+"Enter password" = "Inserisci la password";
+"LOG IN" = "ACCEDI";
+"Don't have an account?" = "Non hai un account?";
+"Sign Up" = "Iscriviti";
+"Let's Get Started!" = "Cominciamo!";
+"Create your account for Fundster" = "Crea il tuo account su Fundster";
+"Name" = "Nome";
+"Email" = "Email";
+"Phone" = "Telefono";
+"Password" = "Password";
+"SIGN UP" = "REGISTRATI";
+"Log out" = "Esci";

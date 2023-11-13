@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  Fundster
+
+  Created by Martin Novak on 12.11.2023..
+  
+*/
+"Users" = "Korisnici";
+"Projects" = "Projekti";
+"Delete" = "Obriši";
+"Enter Number" = "Unesite broj";
+"FUND PROJECT" = "FINANCIRAJ PROJEKT";
+"Profile Name" = "Ime profila";
+"Title" = "Naslov";
+"BACK THIS PROJECT" = "PODRŽI OVAJ PROJEKT";
+"Project name:" = "Naziv projekta:";
+"Enter project name" = "Unesite naziv projekta";
+"Project description:" = "Opis projekta:";
+"Enter project description" = "Unesite opis projekta";
+"Project money goal:" = "Cilj financiranja projekta:";
+"Enter money" = "Unesite iznos";
+"Project deadline:" = "Rok projekta:";
+"CREATE NEW PROJECT" = "STVORI NOVI PROJEKT";
+"Add project" = "Dodaj projekt";
+"Search" = "Pretraživanje";
+"days" = "%@ dana";
+"Funded" = "Financirano";
+"Backers" = "Podržavatelji";
+"Days left" = "Preostali dani";
+"Welcome back!" = "Dobrodošli natrag!";
+"Log in to your existing Fundster account" = "Prijavite se na svoj postojeći račun na Fundsteru";
+"Enter email" = "Unesite e-poštu";
+"Enter password" = "Unesite lozinku";
+"LOG IN" = "PRIJAVI SE";
+"Don't have an account?" = "Nemate račun?";
+"Sign Up" = "Registrirajte se";
+"Let's Get Started!" = "Krenimo!";
+"Create your account for Fundster" = "Izradite svoj račun na Fundsteru";
+"Name" = "Ime";
+"Email" = "E-pošta";
+"Phone" = "Telefon";
+"Password" = "Lozinka";
+"SIGN UP" = "REGISTRIRAJ SE";
+"Log out" = "Odjavi se";

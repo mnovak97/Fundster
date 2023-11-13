@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
+    @EnvironmentObject var authViewModel : AuthViewModel
     @State private var email: String = ""
     @State private var password: String = ""
     var body: some View {
@@ -38,10 +39,10 @@ struct LoginView: View {
                         .foregroundColor(Color.gray)
                 }
                 
-                CustomTextField(imageName: "person.circle", placeholder: "Enter email", text: $email)
-                CustomTextField(imageName: "lock", placeholder: "Enter password", text: $password)
+                CustomTextField(isPassword: false, imageName: "person.circle", placeholder: "Enter email", text: $email)
+                CustomTextField(isPassword: true, imageName: "lock", placeholder: "Enter password", text: $password)
                 Button {
-                    
+                    authViewModel.login(email: email, password: password)
                 } label: {
                     Text("LOG IN")
                         .font(.headline)
@@ -69,7 +70,6 @@ struct LoginView: View {
                             .foregroundColor(Color("Primary"))
                     }
                 }
-
             }
             .padding()
         }

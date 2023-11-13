@@ -8,22 +8,43 @@
 import SwiftUI
 
 struct ExploreView: View {
-    @State private var searchText: String = ""
+    @ObservedObject var viewModel = ExploreViewModel()
     var body: some View {
-        VStack {
-            CustomSearch(text: $searchText)
-            Spacer()
-            ScrollView {
-                LazyVStack {
-                    ProjectThumbnailView()
-                    ProjectThumbnailView()
-                    ProjectThumbnailView()
-                    ProjectThumbnailView()
-                    ProjectThumbnailView()
+        NavigationStack {
+            VStack {
+                CustomSearch(text: $viewModel.searchText)
+                Spacer()
+                List {
+                    ForEach(viewModel.searchableProjects) { project in
+                        ZStack(alignment: .leading) {
+                            NavigationLink(
+                                destination: ProjectDetailsView(viewModel: ProjectDetailViewModel(project: project))) {
+                                    EmptyView()
+                                }
+                                .opacity(0)
+                            ProjectThumbnailView(project: project)
+                                .foregroundColor(.black)
+                        }
+                        .listRowInsets(EdgeInsets())
+                        .listRowSeparator(.hidden)
+                        .padding(.top, 5)
+                        .padding(.bottom, 5)
+                        
+                    }
+                }
+                .listStyle(PlainListStyle())
+                .scrollIndicators(.hidden)
+                .refreshable {
+                    viewModel.clearProjects()
+                    viewModel.fetchProjects()
                 }
             }
+            .onAppear {
+                viewModel.fetchProjects()
+            }
+            .padding()
         }
-        .padding()
+        .accentColor(Color("Primary"))
     }
 }
 
