@@ -28,7 +28,7 @@ struct ProjectDetailsView: View {
             VStack(alignment: .leading) {
                 HStack(spacing: 30) {
                     AsyncImage(
-                        url: URL(string: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tsunami_by_hokusai_19th_century.jpg/700px-Tsunami_by_hokusai_19th_century.jpg"),
+                        url: URL(string: viewModel.projectUser?.profilePictureUrl ?? ""),
                             content: { image in
                                 image
                                     .resizable()
@@ -37,10 +37,14 @@ struct ProjectDetailsView: View {
                                     .aspectRatio(contentMode: .fit)
                                     },
                                     placeholder: {
-                                        ProgressView()
+                                        Image("profile")
+                                           .resizable()
+                                           .frame(width:50,height:50)
+                                           .clipShape(Circle())
+                                           .aspectRatio(contentMode: .fit)
                                     }
                                 )
-                    Text("Profile Name")
+                    Text(viewModel.projectUser?.name ?? "")
                         .bold()
                     Spacer()
                     Image(systemName: "ellipsis")

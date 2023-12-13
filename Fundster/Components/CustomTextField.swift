@@ -10,7 +10,7 @@ import SwiftUI
 struct CustomTextField: View {
     let isPassword: Bool
     let imageName: String
-    let placeholder: String
+    let placeholder: LocalizedStringKey
     @Binding var text: String
     @FocusState var isFocused: Bool
     var body: some View {

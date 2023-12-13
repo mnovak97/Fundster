@@ -12,30 +12,24 @@ struct AdminView: View {
     var body: some View {
         VStack {
             List {
-                Section(header: Text("Users")) {
-                    ForEach(viewModel.users) { user in
-                        ProfileThumbnailView(user: user)
+                ForEach(viewModel.users.filter { $0.projects != nil && !$0.projects!.isEmpty }) { user in
+                    Section(header: Text(user.name ?? "")) {
+                        ForEach(user.projects ?? []) { project in
+                            AdminProjectThumbnailView(project: project)
+                            
+                        }
+                        .onDelete(perform: { indexSet in
+                            guard let index = indexSet.first else {return}
+                            viewModel.deleteProject(user: user, projectIndex: index)
+                        })
                     }
                 }
             }
             .scrollIndicators(.hidden)
             
-            List {
-                Section(header: Text("Projects")) {
-                    ForEach(viewModel.projects) { project in
-                        Text(project.name!)
-                            .swipeActions {
-                                Button("Delete") {
-                                    viewModel.deleteProject(project: project)
-                                }.tint(Color("Primary"))
-                            }
-                    }
-                }
-            }
         }
         .onAppear {
             viewModel.fetchUsers()
-            viewModel.fetchProjects()
         }
     }
 }

@@ -13,7 +13,7 @@ class ProjectUploadViewModel : ObservableObject {
     
     func uploadProject(_ image: UIImage, name: String, desc: String, projectDeadline: Date, moneyGoal: Int) {
         if let id = UserSessionManager.shared.retrieveUserID() {
-            ImageUploader().uploadProjectImage(image: image) { pictureUrl in
+            ImageUploader().uploadProjectImage(image: image, projectImage: true) { pictureUrl in
                 Task {
                     do {
                         let project = CreateProjectDTO(name: name,projectPictureUrl: pictureUrl,description: desc,moneyGoal: moneyGoal,deadline: projectDeadline,userID: id)

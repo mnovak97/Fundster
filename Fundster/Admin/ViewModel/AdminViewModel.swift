@@ -8,23 +8,19 @@
 import Foundation
 class AdminViewModel : ObservableObject {
     @Published var users = [User]()
-    @Published var projects = [Project]()
     
     let userService = UserService()
     let projectService = ProjectService()
     
     init() {
         fetchUsers()
-        fetchProjects()
     }
-    func deleteProject(project: Project) {
+    func deleteProject(user: User, projectIndex: Int) {
         Task {
             if let token = UserSessionManager.shared.retrieveUserToken() {
-                try await projectService.deleteProject(projectID: project.id, token: token)
-                DispatchQueue.main.async {
-                    self.projects.removeAll { $0.id == project.id}
-                }
-                
+                let projectToDelete = user.projects?[projectIndex]
+                try await projectService.deleteProject(projectID: projectToDelete?.id, token: token)
+                fetchUsers()
             }
         }
     }
@@ -35,17 +31,6 @@ class AdminViewModel : ObservableObject {
                 let users = try await userService.getUsers(token: token)
                 DispatchQueue.main.async {
                     self.users = users
-                }
-            }
-        }
-    }
-    
-    func fetchProjects() {
-        Task {
-            if let token = UserSessionManager.shared.retrieveUserToken() {
-                let projects = try await projectService.getProjects(token: token)
-                DispatchQueue.main.async {
-                    self.projects = projects
                 }
             }
         }

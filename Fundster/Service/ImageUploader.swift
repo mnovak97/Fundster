@@ -11,12 +11,18 @@ import FirebaseStorage
 
 struct ImageUploader {
     
-    func uploadProjectImage(image: UIImage, completion: @escaping (String) -> Void) {
+    func uploadProjectImage(image: UIImage,projectImage: Bool, completion: @escaping (String) -> Void) {
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else { return }
                
-        let filename = NSUUID().uuidString
-        let ref = Storage.storage().reference(withPath: "/projectImages/\(filename)")
+        var ref: StorageReference
+        if projectImage {
+            let filename = NSUUID().uuidString
+            ref = Storage.storage().reference(withPath: "/projectImages/\(filename)")
+        } else {
+            let filename = NSUUID().uuidString
+            ref = Storage.storage().reference(withPath: "/profileImages/\(filename)")
+        }
         
         ref.putData(imageData, metadata: nil) {_, error in
             if let error = error {

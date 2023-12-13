@@ -33,6 +33,36 @@ struct UserService {
         }
     }
     
+    func updateUser(updatedUser:User, token: String) async throws {
+        if let id = updatedUser.id {
+            guard let url = URL(string: endpoint + "/\(id)") else {
+                throw ApiError.invalidURL
+            }
+            
+            var request = URLRequest(url: url)
+            request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            request.httpMethod = "PUT"
+            request.setValue("application/json", forHTTPHeaderField: "Content-type")
+            
+            do {
+                let encoder = JSONEncoder()
+                encoder.dateEncodingStrategy = .iso8601
+                let jsonData = try encoder.encode(updatedUser)
+                request.httpBody = jsonData
+                
+                let (_, response) = try await URLSession.shared.data(for: request)
+                
+                guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 204 else {
+                    throw ApiError.invalidResponse
+                }
+                
+                print("User updated successfully")
+            } catch {
+                throw ApiError.invalidData
+            }
+        }
+    }
+    
     func createUser(user: CreateUserDTO) async throws -> User {
         guard let url = URL(string: endpoint) else {
             throw ApiError.invalidURL

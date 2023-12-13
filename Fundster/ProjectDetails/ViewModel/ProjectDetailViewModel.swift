@@ -8,10 +8,25 @@
 import Foundation
 class ProjectDetailViewModel: ObservableObject {
     @Published var project : Project
+    @Published var projectUser: User?
     let projectService = ProjectService()
+    let userService = UserService()
     
     init(project: Project) {
         self.project = project
+        self.fetchProjectUser()
+    }
+    func fetchProjectUser() {
+        Task {
+            if let id = UserSessionManager.shared.retrieveUserID() {
+                if let token = UserSessionManager.shared.retrieveUserToken() {
+                    let user = try await userService.getUser(withID: id, token: token)
+                    DispatchQueue.main.async {
+                        self.projectUser = user
+                    }
+                }
+            }
+        }
     }
     
     func updateProject(money: Int) {

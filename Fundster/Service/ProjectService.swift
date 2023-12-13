@@ -66,9 +66,8 @@ struct ProjectService {
                 throw ApiError.invalidData
             }
         }
-        
-        
     }
+    
     func deleteProject(projectID: Int? , token: String) async throws {
         if let id = projectID {
             guard let url = URL(string: endpoint + "/\(id)") else {
